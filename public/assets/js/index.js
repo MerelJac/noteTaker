@@ -21,12 +21,17 @@ app.get('/notes', (req, res) => {
 app.post('/api/notes', (req, res) => {
   console.info(`${req.method} request received to post a note`);
   console.log(req.body);
-  res.status(200).json(req.body);
+  res.status(200).json({message: "Note successfully posted"});
   db.push(req.body)
 })
 
 app.get('/api/notes', (req, res) => {
   res.json(db)
+})
+
+app.delete('/api/notes', (req, res) => {
+  console.info(`${req.method} request received to post a note`);
+  res.status(200).json({message: "Note successfully deleted"});
 })
 
 // call server

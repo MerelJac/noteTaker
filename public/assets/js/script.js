@@ -43,7 +43,7 @@ const saveNote = (note) =>
     },
     body: JSON.stringify(note),
   }).then((response) => response.json())
-  .then((data) => console.log(data));
+  .then((data) => console.log(data))
 
 const deleteNote = (id) =>
   fetch(`/api/notes/${id}`, {
@@ -71,6 +71,7 @@ const renderActiveNote = () => {
 
 const handleNoteSave = () => {
   const newNote = {
+    id: generateUniqueId(),
     title: noteTitle.value,
     text: noteText.value,
   };
@@ -87,6 +88,7 @@ const handleNoteDelete = (e) => {
 
   const note = e.target;
   const noteId = JSON.parse(note.parentElement.getAttribute('data-note')).id;
+  console.log(noteId)
 
   if (activeNote.id === noteId) {
     activeNote = {};
@@ -173,6 +175,16 @@ const renderNoteList = async (notes) => {
 
 };
 
+function generateUniqueId() {
+  let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  const result = [];
+  for (var i = 0; i < 10; i++) {
+    let randomIndex = Math.floor(Math.random() * characters.length );
+    let randomCharacter = characters.charAt(randomIndex);
+    result.push(randomCharacter)
+  }
+  return result.join('')
+}
 // Gets notes from the db and renders them to the sidebar
 const getAndRenderNotes = () => getNotes().then(renderNoteList);
 
@@ -180,5 +192,6 @@ const getAndRenderNotes = () => getNotes().then(renderNoteList);
   newNoteBtn.addEventListener('click', handleNewNoteView);
   noteTitle.addEventListener('keyup', handleRenderSaveBtn);
   noteText.addEventListener('keyup', handleRenderSaveBtn);
+  generateUniqueId()
 
 getAndRenderNotes();
