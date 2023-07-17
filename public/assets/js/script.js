@@ -10,6 +10,10 @@ let noteList;
   newNoteBtn = document.querySelector('.new-note');
   noteList = document.querySelectorAll('.list-container .list-group');
 
+let note = {
+    title: noteTitle.value,
+    text: noteText.value
+}
 // Show an element
 const show = (elem) => {
     elem.style.display = 'inline';
@@ -38,7 +42,8 @@ const saveNote = (note) =>
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(note),
-  });
+  }).then((response) => response.json())
+  .then((data) => console.log(data));
 
 const deleteNote = (id) =>
   fetch(`/api/notes/${id}`, {
@@ -170,7 +175,6 @@ const renderNoteList = async (notes) => {
 
 // Gets notes from the db and renders them to the sidebar
 const getAndRenderNotes = () => getNotes().then(renderNoteList);
-
 
   saveNoteBtn.addEventListener('click', handleNoteSave);
   newNoteBtn.addEventListener('click', handleNewNoteView);
