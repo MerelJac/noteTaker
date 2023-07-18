@@ -42,7 +42,10 @@ The application will be running on `http://localhost:3000`
 ## License
 This project is licensed under the MIT License.
 
+## Contributions
+This code was refactored to use a backend server. Front-end code courtesy of [Coding Boot Camp](https://github.com/coding-boot-camp/miniature-eureka).
 ## Contact
+
 For any questions or contributions, please contact via [GitHub](https://github.com/MerelJac)
 
 Deployed application: Link to the deployed application
